@@ -16,6 +16,7 @@ import Profile from './Profile';
 import FriendsPage from './Components/FriendsPage';
 import Locations from './Components/Locations'
 import Favorites from './Components/Favorites';
+import AddLocation from './Components/AddLocation'
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -82,6 +83,11 @@ function App() {
             exact
             path="/favorites"
             component={(props) => <Favorites {...props} />}
+          />
+           <PrivateRoute
+            exact
+            path="/addLocation"
+            component={(props) => <AddLocation {...props} />}
           />
         </Switch>
       </Router>
