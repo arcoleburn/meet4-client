@@ -1,29 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import FriendSummary from './FriendSummary'
+import Meet4ApiService from '../../Services/meet4ApiService';
+import FriendSummary from './FriendSummary';
 const FriendsPage = (props) => {
   const [loading, setLoading] = useState(false);
-  const friends = [
-    {
-      username: 'jim',
-      email: 'jim@123.com',
-      date: '2020-02-01',
-      coffee: 5,
-      pizza: 4,
-      beer: 3,
-    },
-    {
-      username: 'bob',
-      email: 'bob@123.com',
-      date: '2020-03-04',
-      coffee: 2,
-      pizza: 8,
-      beer: 4,
-    },
-  ];
-  //need to fetch friends
-  //and then
+  const [friends, setFriends] = useState([]);
 
+  useEffect(() => {
+    Meet4ApiService.getFriends().then((friends) =>
+      setFriends(friends)
+    );
+  }, []);
+
+  useEffect(()=>{
+    for(let friend in friends){
+      Meet4ApiService.getFriendDetails(friend.initiator_id).then(x=>console.log(x))
+    }
+  },[friends])
   let friendsDisplay = friends.map((friend) => {
     return <FriendSummary friendData={friend} />;
   });

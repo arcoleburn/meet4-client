@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Meet4ApiService from '../../../Services/meet4ApiService'
 
 const AddLoc = (props)=>{
   const [name, setName] = useState('')
@@ -7,8 +8,9 @@ const AddLoc = (props)=>{
 
   const handleSubmit=(e) => {
     e.preventDefault()
-    //need code to make POST name and address 
-    console.log(name, address)
+    let loc = {name, address}
+    Meet4ApiService.addLocationForUser(loc).then(res=>console.log(res))
+    props.history.push('/locations')
   }
   return (
     <>

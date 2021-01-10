@@ -16,15 +16,17 @@ import Profile from './Profile';
 import FriendsPage from './Components/FriendsPage';
 import Locations from './Components/Locations'
 import Favorites from './Components/Favorites';
-import AddLocation from './Components/AddLocation'
+import AddLocation from './Components/Locations/AddLocation'
+import FriendRequests from './Components/FriendsPage/FriendRequests';
 
 function App() {
   const [userId, setUserId] = useState(null);
-
+  const [username, setUsername] = useState('')
   useEffect(() => {
     if (!TokenService.getAuthToken()) return;
     if (TokenService.getAuthToken() && userId == null) {
       setUserId(jwt.decode(TokenService.getAuthToken()).userId);
+      setUsername(jwt.decode(TokenService.getAuthToken()).username)
     }
   }, [userId]);
 
@@ -50,7 +52,7 @@ function App() {
             path="/login"
             component={(props) => (
               <>
-                <LoginPage {...props} setUserId={setUserId} />
+                <LoginPage {...props} setUserId={setUserId} setUsername={setUsername} />
               </>
             )}
           />
@@ -73,7 +75,12 @@ function App() {
             exact
             path="/friends"
             component={(props) => <FriendsPage {...props} />}
-          />
+          /> 
+          <PrivateRoute
+          exact
+          path="/requests"
+          component={(props) => <FriendRequests {...props} />}
+        />
           <PrivateRoute
             exact
             path="/locations"
