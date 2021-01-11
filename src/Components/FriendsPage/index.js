@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Meet4ApiService from '../../Services/meet4ApiService';
+import jwt from 'jsonwebtoken';
+import TokenService from '../../Services/tokenService';
 import FriendSummary from './FriendSummary';
 const FriendsPage = (props) => {
   const [loading, setLoading] = useState(false);
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState(['no friends yet']);
+
+  const username = jwt.decode(TokenService.getAuthToken()).username;
 
   useEffect(() => {
+    setLoading(true)
+    setTimeout(()=>console.log('waited'),5000)
     Meet4ApiService.getFriends().then((friends) =>
       setFriends(friends)
     );
+    setLoading(false)
   }, []);
-
-  useEffect(()=>{
-    for(let friend in friends){
-      Meet4ApiService.getFriendDetails(friend.initiator_id).then(x=>console.log(x))
-    }
-  },[friends])
-  let friendsDisplay = friends.map((friend) => {
-    return <FriendSummary friendData={friend} />;
-  });
+  let friendsDisplay = friends
+    .filter((x) => x.username != username)
+    .map((friend) => {
+      return <FriendSummary friendData={friend} key={friend.id} />;
+    });
 
   return (
     <>

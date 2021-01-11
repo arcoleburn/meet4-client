@@ -8,9 +8,9 @@ const FriendSummaryExp = (props) => {
 
   return (
     <>
-      <p>Pizza: {props.friendData.pizza}</p>
-      <p>Coffee: {props.friendData.pizza}</p>
-      <p>Beer: {props.friendData.pizza}</p>
+      <p>Pizza: {props.friendData.pizza_count}</p>
+      <p>Coffee: {props.friendData.coffee_count}</p>
+      <p>Beer: {props.friendData.beer_count}</p>
       <button onClick ={props.handleClick}>Hide</button>
       <button>Remove Friend</button>
     </>

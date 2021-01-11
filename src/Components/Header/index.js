@@ -8,10 +8,12 @@ const Header = (props) => {
   };
 
   const renderLogoutLink = () => {
-    return (
+    return (<>
+      <p>{props.username}</p>
       <Link onClick={handleLogout} to="/">
         Logout
       </Link>
+      </>
     );
   };
 

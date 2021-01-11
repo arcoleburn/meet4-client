@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header setUserId={setUserId} />
+        <Header setUserId={setUserId} username={username} />
         <Switch>
           <PublicOnlyRoute
             exact
@@ -69,7 +69,7 @@ function App() {
            <PrivateRoute
             exact
             path="/profile"
-            component={(props) => <Profile {...props} />}
+            component={(props) => <Profile {...props} username={username}/>}
           />
             <PrivateRoute
             exact

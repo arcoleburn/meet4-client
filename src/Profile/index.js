@@ -22,7 +22,7 @@ const Profile = (props) => {
   return (
     <>
       <h2> Profile</h2>
-      <h3> username here</h3>
+      <h3> Hey, {props.username}!</h3>
       <Link to="/friends">Friends </Link>
       <Link to="/locations">Locations</Link>
 

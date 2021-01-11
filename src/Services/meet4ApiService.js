@@ -18,7 +18,6 @@ const Meet4ApiService = {
       headers,
     }).then((res) =>
       res.json().then((data) => {
-        console.log(data);
         return data;
       })
     );
@@ -38,7 +37,7 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
       headers,
       method: 'DELETE',
-    })
+    });
     //.then((res) => res.json()).then(data=>data);
   },
   getFriendDetails(friendId) {
@@ -70,6 +69,14 @@ const Meet4ApiService = {
       headers,
       method: 'DELETE',
     });
+  },
+  getFriendLocs(friendUsername) {
+    return fetch(`${config.API_ENDPOINT}/friends/friendlocs/${friendUsername}`, {
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) => res.json());
   },
 };
 

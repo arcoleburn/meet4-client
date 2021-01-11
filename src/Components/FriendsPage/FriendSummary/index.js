@@ -8,10 +8,10 @@ const FriendSummary = (props) => {
 
   const handleClick = () => toggleExpand();
 
-  let { userName, email, date } = props.friendData;
+  let { username, email, date_added: date } = props.friendData;
   return (
     <>
-      <div>{userName}</div>
+      <div>{username}</div>
       <div>{email}</div>
       <div>{date}</div>
       {!expanded && <button onClick={handleClick}>More</button>}

@@ -20,7 +20,6 @@ const RequestItem=(props)=>{
     <>
     <div>
       Username: {username}
-      id: {id}
       <button onClick={handleAccept}>Accept</button>
       <button onClick={handleDelete}>Delete</button>
     </div>
