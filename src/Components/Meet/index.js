@@ -20,6 +20,7 @@ function reducer(state, { field, value }) {
 }
 
 const Meet = (props) => {
+  const [sub, setSub] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialFormState);
   const [userLocs, setUserLocs] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
@@ -90,48 +91,58 @@ const Meet = (props) => {
 
   return (
     <>
-      <h2>Let's Meet</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="category">For: </label>
-        <select name="category" id="category" onChange={onChange}>
-          <option value="pizza">Pizza</option>
-          <option value="coffee">Coffee</option>
-          <option value="beer">Beer</option>
-        </select>
-        <label htmlFor="location"> Where are you? </label>
-        <select name="location" id="location" onChange={onChange}>
-          {userLocs.map((x) => makeOption(x.location_name))}
-        </select>
-        {state.location == 'Other'
-          ? makeOtherField('manualLoc', 'Other (enter address): ')
-          : null}
-        <label htmlFor="friend">Who are you meeting?</label>
-        <select name="friend" id="friend" onChange={onFriendChange}>
-          {userFriends.map((x) => makeOption(x.username))}
-        </select>
-        {state.friend == 'Other'
-          ? makeOtherField(
-              'manualFriendLoc',
-              'Where Are They? (Enter address)'
-            )
-          : null}
-        {state.friend !== 'Other' && (
-          <label htmlFor="friendLocation">Where are they?</label>
-        )}
-        {state.friend !== 'Other' && (
-          <select
-            name="friendLocation"
-            id="friendLocation"
-            onChange={onChange}
-          >
-            {friendLocs.map((x) => makeOption(x.location_name))}
-          </select>
-        )}
-        {state.friendLocation == 'Other'
-          ? makeOtherField('manualFriendLoc', 'Other: ')
-          : null}
-        <button type="submit">Go!</button>
-      </form>
+      {!sub && (
+        <>
+          {' '}
+          <h2>Let's Meet</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="category">For: </label>
+            <select name="category" id="category" onChange={onChange}>
+              <option value="pizza">Pizza</option>
+              <option value="coffee">Coffee</option>
+              <option value="beer">Beer</option>
+            </select>
+            <label htmlFor="location"> Where are you? </label>
+            <select name="location" id="location" onChange={onChange}>
+              {userLocs.map((x) => makeOption(x.location_name))}
+            </select>
+            {state.location == 'Other'
+              ? makeOtherField('manualLoc', 'Other (enter address): ')
+              : null}
+            <label htmlFor="friend">Who are you meeting?</label>
+            <select
+              name="friend"
+              id="friend"
+              onChange={onFriendChange}
+            >
+              {userFriends.map((x) => makeOption(x.username))}
+            </select>
+            {state.friend == 'Other'
+              ? makeOtherField(
+                  'manualFriendLoc',
+                  'Where Are They? (Enter address)'
+                )
+              : null}
+            {state.friend !== 'Other' && (
+              <label htmlFor="friendLocation">Where are they?</label>
+            )}
+            {state.friend !== 'Other' && (
+              <select
+                name="friendLocation"
+                id="friendLocation"
+                onChange={onChange}
+              >
+                {friendLocs.map((x) => makeOption(x.location_name))}
+              </select>
+            )}
+            {state.friendLocation == 'Other'
+              ? makeOtherField('manualFriendLoc', 'Other: ')
+              : null}
+            <button type="submit">Go!</button>
+          </form>{' '}
+        </>
+      )}
+      {/* {sub && <Results data = {state} />} */}
     </>
   );
 };

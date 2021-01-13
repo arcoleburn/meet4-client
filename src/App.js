@@ -12,7 +12,7 @@ import Header from './Components/Header';
 import RegistrationPage from './Components/Registration';
 import LoginPage from './Components/Login';
 import Meet from './Components/Meet'
-import Profile from './Profile';
+import Profile from './Components/Profile';
 import FriendsPage from './Components/FriendsPage';
 import Locations from './Components/Locations'
 import Favorites from './Components/Favorites';
