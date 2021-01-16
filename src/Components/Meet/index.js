@@ -2,6 +2,10 @@ import React, { useEffect, useReducer, useState } from 'react';
 import jwt from 'jsonwebtoken';
 import Meet4ApiService from '../../Services/meet4ApiService';
 import TokenService from '../../Services/tokenService';
+import Results from './Results';
+
+import {FormWrapper} from '../Utils/Form.styles'
+import {MeetWrapper} from './Meet.styles'
 
 const initialFormState = {
   category: 'pizza',
@@ -46,7 +50,7 @@ const Meet = (props) => {
     e.preventDefault();
     console.log(e.target);
     console.log(state);
-    //need to actually build out this funcitonality
+    setSub(true);
   };
 
   useEffect(() => {
@@ -92,10 +96,10 @@ const Meet = (props) => {
   return (
     <>
       {!sub && (
-        <>
+        <MeetWrapper>
           {' '}
           <h2>Let's Meet</h2>
-          <form onSubmit={handleSubmit}>
+          <FormWrapper onSubmit={handleSubmit}>
             <label htmlFor="category">For: </label>
             <select name="category" id="category" onChange={onChange}>
               <option value="pizza">Pizza</option>
@@ -139,10 +143,29 @@ const Meet = (props) => {
               ? makeOtherField('manualFriendLoc', 'Other: ')
               : null}
             <button type="submit">Go!</button>
-          </form>{' '}
-        </>
+          </FormWrapper>{' '}
+        </MeetWrapper>
       )}
-      {/* {sub && <Results data = {state} />} */}
+      {sub && (
+        <Results history={props.history}
+          category={state.category}
+          addressA={
+            state.location == 'Other'
+              ? state.manualLoc
+              : userLocs.filter(
+                  (x) => x.location_name == state.location
+                )
+          }
+          addressB={
+            state.friend == 'Other' || state.friendlocation == 'Other'
+              ? state.manualFriendLoc
+              : friendLocs.filter(
+                  (x) => x.location_name == state.friendLocation
+                )
+          }
+          data={state}
+        />
+      )}
     </>
   );
 };

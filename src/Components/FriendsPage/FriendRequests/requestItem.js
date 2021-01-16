@@ -9,7 +9,7 @@ const RequestItem=(props)=>{
   const handleAccept = (e) =>{
     console.log('id,', id)
     Meet4ApiService.acceptFriendRequest(id)
-    props.delFromList(id).then(data=>data)
+    props.delFromList(id)
   }
   const handleDelete = (e) =>{
     Meet4ApiService.deleteFriendRequest(id)

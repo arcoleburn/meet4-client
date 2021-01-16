@@ -1,6 +1,6 @@
 import { useState, useReducer } from 'react';
 import AuthApiService from '../../Services/authApiService'; //need to build
-
+import {FormWrapper} from '../Utils/Form.styles'
 const initialFormState = {
   regUsername: '',
   regPassword: '',
@@ -46,7 +46,7 @@ const RegistrationForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <FormWrapper onSubmit={handleSubmit}>
       <div>{error && <p>{error.error}</p>}</div>
       <label htmlFor="regUsername"> Username: </label>
       <input
@@ -83,7 +83,7 @@ const RegistrationForm = (props) => {
       />
 
       <button type="submit"> Register </button>
-    </form>
+    </FormWrapper>
   );
 };
 

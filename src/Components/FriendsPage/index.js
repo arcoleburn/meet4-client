@@ -12,17 +12,25 @@ const FriendsPage = (props) => {
 
   useEffect(() => {
     setLoading(true)
-    setTimeout(()=>console.log('waited'),5000)
     Meet4ApiService.getFriends().then((friends) =>
       setFriends(friends)
     );
     setLoading(false)
   }, []);
+
+  const removeFriendFromList =(id) => {
+    let newFriends = [...friends]
+    console.log('rem friend list ran')
+    setFriends(newFriends.filter(x=>x.id !== id))
+  }
+
   let friendsDisplay = friends
     .filter((x) => x.username != username)
     .map((friend) => {
-      return <FriendSummary friendData={friend} key={friend.id} />;
+      return <FriendSummary removeFriend={removeFriendFromList} friendData={friend} key={friend.id} setFriends={setFriends}/>;
     });
+
+ 
 
   return (
     <>

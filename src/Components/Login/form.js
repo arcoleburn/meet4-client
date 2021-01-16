@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import TokenService from '../../Services/tokenService';
 import AuthApiService from '../../Services/authApiService';
-
+import {FormWrapper} from '../Utils/Form.styles'
 const LoginForm = (props) => {
   const [error, setError] = useState(null);
 
@@ -31,14 +31,14 @@ const LoginForm = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmitJwtAuth}>
+      <FormWrapper onSubmit={handleSubmitJwtAuth}>
         {error && <div>{error.error}</div>}
         <label htmlFor="username"> Username: </label>
         <input required type="text" id="username" />
         <label htmlFor="password">Password: </label>
         <input required id="password" type="password" />
         <button type="submit"> Login </button>
-      </form>
+      </FormWrapper>
     </>
   );
 };

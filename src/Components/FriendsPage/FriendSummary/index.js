@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FriendSummaryExp from '../FriendSummaryExp'
+import FriendSummaryExp from '../FriendSummaryExp';
 
 const FriendSummary = (props) => {
   const [expanded, setExpand] = useState(false);
@@ -16,11 +16,14 @@ const FriendSummary = (props) => {
       <div>{date}</div>
       {!expanded && <button onClick={handleClick}>More</button>}
       {expanded ? (
-        <FriendSummaryExp handleClick={handleClick} friendData={props.friendData} />
+        <FriendSummaryExp
+          handleClick={handleClick}
+          friendData={props.friendData}
+          removeFriend={props.removeFriend}
+        />
       ) : null}
     </>
   );
 };
 
 export default FriendSummary;
-

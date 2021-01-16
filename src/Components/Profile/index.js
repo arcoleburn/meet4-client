@@ -5,6 +5,10 @@ import { Loader } from '@googlemaps/js-api-loader';
 
 import { PolyUtil } from 'node-geometry-library';
 
+import { ProfileWrapper } from './Profile.styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faBeer, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+
 const Profile = (props) => {
   //needs to be passed stats or fetch stats. probably fetch, only need it here.
 
@@ -23,40 +27,28 @@ const Profile = (props) => {
     );
   }, []);
 
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.GOOGLE_KEY,
-      libraries: 'geometry',
-    });
-    console.log(
-      PolyUtil.decode(
-        'qmkwF|}gbMgBT]PCm@Eo@SmDQ}CEe@B?g@BaRda@kBxDS`@g@~@g@|@S^mNlZyMvY]dAsNhl@Ub@yEnGYr@ok@rqC[pAc@zAYhAERIRaNpp@yDrPCZ@p@FVJRNRRRxI`HPN`@Z`ExCqHhJsAgA_hAw|@a@Qa@MsVcD}IiAgAQqKgBg@Ig@GqE_@`CYj@kA'
-      )
-    );
-    // loader
-    //   .load()
-    //   .then(() => {
-    //     const ptsArr = PolyUtil.decode(
-    //       'qmkwF|}gbMgBT]PCm@Eo@SmDQ}CEe@B?g@BaRda@kBxDS`@g@~@g@|@S^mNlZyMvY]dAsNhl@Ub@yEnGYr@ok@rqC[pAc@zAYhAERIRaNpp@yDrPCZ@p@FVJRNRRRxI`HPN`@Z`ExCqHhJsAgA_hAw|@a@Qa@MsVcD}IiAgAQqKgBg@Ig@GqE_@`CYj@kA'
-    //     );
-    //     console.log('pts arr', ptsArr);
-    //   })
-    //   .catch((err) => console.log(err));
-  });
-
   return (
-    <>
-      <h2> Profile</h2>
-      <h3> Hey, {props.username}!</h3>
-      <Link to="/friends">Friends </Link>
-      <Link to="/locations">Locations</Link>
-
-      <section>
-        <p>Pizza count: {stats.pizza}</p>
-        <p>Coffee count: {stats.coffee} </p>
-        <p>Beer count: {stats.beer}</p>
+    <ProfileWrapper>
+      <h3> Welcome back, {props.username}!</h3>
+      <div className="links">
+        <Link to="/friends">Friends </Link>
+        <Link to="/locations">Locations</Link>
+      </div>
+      <section className='stats'>
+        <div>
+          <FontAwesomeIcon icon={faPizzaSlice} />
+          <p>{stats.pizza}</p>
+        </div>
+        <div>
+          <FontAwesomeIcon icon={faCoffee} /> 
+          <p>{stats.coffee}</p>
+        </div>
+        <div>
+          <FontAwesomeIcon icon = {faBeer} />
+          <p>{stats.beer}</p>
+        </div>
       </section>
-    </>
+    </ProfileWrapper>
   );
 };
 

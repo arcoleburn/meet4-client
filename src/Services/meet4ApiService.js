@@ -22,6 +22,16 @@ const Meet4ApiService = {
       })
     );
   },
+  addFriend(friendUsername) {
+    return fetch(`${config.API_ENDPOINT}/friends`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({friendUsername: friendUsername}),
+    }).then((res) => res.json());
+  },
   getFriendRequests() {
     return fetch(`${config.API_ENDPOINT}/friends/requests`, {
       headers,
@@ -71,12 +81,63 @@ const Meet4ApiService = {
     });
   },
   getFriendLocs(friendUsername) {
-    return fetch(`${config.API_ENDPOINT}/friends/friendlocs/${friendUsername}`, {
+    return fetch(
+      `${config.API_ENDPOINT}/friends/friendlocs/${friendUsername}`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+      }
+    ).then((res) => res.json());
+  },
+  getBusinesses(addressA, addressB, category) {
+    return fetch(
+      `${config.API_ENDPOINT}/directions/results?addressA=${addressA}&addressB=${addressB}&category=${category}`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+      }
+    ).then((res) => res.json());
+  },
+  getDirections(addressA, addressB) {
+    return fetch(
+      `${config.API_ENDPOINT}/directions?addressA=${addressA}&addressB=${addressB}`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`,
+        },
+      }
+    ).then((res) => res.json());
+  },
+  addHistory(
+    user2,
+    user1_location,
+    user2_location,
+    restaurant_name,
+    restaurant_address,
+    category
+  ) {
+    let newHistory = {
+      user2,
+      user1_location,
+      user2_location,
+      restaurant_name,
+      restaurant_address,
+      category,
+    };
+    console.log('new history', newHistory);
+    return fetch(`${config.API_ENDPOINT}/history`, {
       headers: {
         'content-type': 'application/json',
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-    }).then((res) => res.json());
+      method: 'POST',
+      body: JSON.stringify(newHistory),
+    });
   },
 };
 
