@@ -19,7 +19,7 @@ const Results = (props) => {
         setLoading(false);
       }
     );
-  }, []);
+  }, [addressA, addressB, category]);
 
   return (
     <>
@@ -34,7 +34,7 @@ const Results = (props) => {
             Address: {businesses[resNum].location.display_address}
           </p>
           <p>Phone: {businesses[resNum].display_phone}</p>
-          <a href={businesses[resNum].url} target="_blank">
+          <a href={businesses[resNum].url} target="_blank" rel="noreferrer">
             View on Yelp
           </a>
           <button

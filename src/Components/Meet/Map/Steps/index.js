@@ -16,11 +16,11 @@ export const Step = (props) => {
       <>
         <h4>
           <FontAwesomeIcon
-            icon={type == 'transit' ? faSubway : faWalking}
+            icon={type === 'transit' ? faSubway : faWalking}
           />
           {parseInstructions(props.stepData.html_instructions)}
         </h4>
-        {type == 'transit' ? (
+        {type === 'transit' ? (
           <>
             <li>
               Line: {props.stepData.transit_details.line.short_name}

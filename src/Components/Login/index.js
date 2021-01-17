@@ -7,7 +7,6 @@ import TokenService from '../../Services/tokenService';
 import logo from '../../images/logo.png';
 
 import {RegLoginWrapper} from './Login.styles'
-import { noAuto } from '@fortawesome/fontawesome-svg-core';
 
 const LoginPage = (props) => {
   const handleLoginSuccess = () => {
@@ -21,7 +20,7 @@ const LoginPage = (props) => {
 
   return (
     <RegLoginWrapper>
-    <img src={logo} style={{alignContent: 'center'}}/>
+    <img src={logo} style={{alignContent: 'center'}} alt='meet4 logo'/>
       <h2>Login</h2>
       <LoginForm
         onLoginSuccess={handleLoginSuccess}

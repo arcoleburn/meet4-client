@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Meet4ApiService from '../../Services/meet4ApiService';
-import { Loader } from '@googlemaps/js-api-loader';
-
-import { PolyUtil } from 'node-geometry-library';
 
 import { ProfileWrapper } from './Profile.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

@@ -25,7 +25,7 @@ const FriendsPage = (props) => {
   }
 
   let friendsDisplay = friends
-    .filter((x) => x.username != username)
+    .filter((x) => x.username !== username)
     .map((friend) => {
       return <FriendSummary removeFriend={removeFriendFromList} friendData={friend} key={friend.id} setFriends={setFriends}/>;
     });

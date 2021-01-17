@@ -11,7 +11,7 @@ const RegistrationPage = (props) => {
 
   return (
     <RegLoginWrapper>
-      <img src={logo}/>
+      <img src={logo} alt='logo'/>
       <h2>Register</h2>
       <RegistrationForm onRegSuccess={handleRegSuccess} />
       

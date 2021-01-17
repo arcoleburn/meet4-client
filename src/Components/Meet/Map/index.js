@@ -12,7 +12,7 @@ const Map = (props) => {
   let destination = props.business.location.display_address.join(' ');
 
   useEffect(() => {
-    console.log(userAddress, friendAddress)
+   setLoading(true)
     Meet4ApiService.getDirections(userAddress, destination)
       .then((res) => setUserDir(res))
       .then(
@@ -24,7 +24,7 @@ const Map = (props) => {
           setLoading(false);
         })
       );
-  }, []);
+  }, [destination, friendAddress, userAddress]);
 
   const logMeeting = () => {
     console.log('meeting logged');
@@ -33,15 +33,15 @@ const Map = (props) => {
     console.log('loc1', loc1)
     let loc2 = props.data.friendLocation;
     if (
-      props.data.friend == 'Other' ||
-      props.data.friend == 'Other'
+      props.data.friend === 'Other' ||
+      props.data.friend === 'Other'
     ) {
       loc2 = props.data.manualFriendLoc;
     }
-    if (props.data.location == 'Other') {
+    if (props.data.location === 'Other') {
       loc1 = props.data.manualLoc;
     }
-    if (props.data.friend == 'Other') {
+    if (props.data.friend === 'Other') {
       user2 = null;
     }
     console.log('loc1', loc1)
@@ -120,7 +120,7 @@ const Map = (props) => {
 
   return (
     <>
-      {!userDirections || !friendDirections ? (
+      {!userDirections || !friendDirections || loading ? (
         <p>loading...</p>
       ) : (
         <>

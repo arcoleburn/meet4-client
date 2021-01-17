@@ -57,7 +57,7 @@ const Meet = (props) => {
     Meet4ApiService.getFriends().then((friends) =>
       setUserFriends(
         [{ id: 'other', username: 'Other' }].concat(
-          friends.filter((x) => x.username != username)
+          friends.filter((x) => x.username !== username)
         )
       )
     );
@@ -110,7 +110,7 @@ const Meet = (props) => {
             <select name="location" id="location" onChange={onChange}>
               {userLocs.map((x) => makeOption(x.location_name))}
             </select>
-            {state.location == 'Other'
+            {state.location === 'Other'
               ? makeOtherField('manualLoc', 'Other (enter address): ')
               : null}
             <label htmlFor="friend">Who are you meeting?</label>
@@ -121,7 +121,7 @@ const Meet = (props) => {
             >
               {userFriends.map((x) => makeOption(x.username))}
             </select>
-            {state.friend == 'Other'
+            {state.friend === 'Other'
               ? makeOtherField(
                   'manualFriendLoc',
                   'Where Are They? (Enter address)'
@@ -139,7 +139,7 @@ const Meet = (props) => {
                 {friendLocs.map((x) => makeOption(x.location_name))}
               </select>
             )}
-            {state.friendLocation == 'Other'
+            {state.friendLocation === 'Other'
               ? makeOtherField('manualFriendLoc', 'Other: ')
               : null}
             <button type="submit">Go!</button>
@@ -150,17 +150,17 @@ const Meet = (props) => {
         <Results history={props.history}
           category={state.category}
           addressA={
-            state.location == 'Other'
+            state.location === 'Other'
               ? state.manualLoc
               : userLocs.filter(
-                  (x) => x.location_name == state.location
+                  (x) => x.location_name === state.location
                 )
           }
           addressB={
-            state.friend == 'Other' || state.friendlocation == 'Other'
+            state.friend === 'Other' || state.friendlocation === 'Other'
               ? state.manualFriendLoc
               : friendLocs.filter(
-                  (x) => x.location_name == state.friendLocation
+                  (x) => x.location_name === state.friendLocation
                 )
           }
           data={state}

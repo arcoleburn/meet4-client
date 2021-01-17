@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import config from '../../../config';
 import Meet4ApiService from '../../../Services/meet4ApiService';
-import TokenService from '../../../Services/tokenService';
 import RequestItem from './requestItem';
 
 const FriendRequests = (props) => {

@@ -16,7 +16,7 @@ const LoginForm = (props) => {
       password: password.value,
     })
       .then((res) => {
-        if (!res.status == 200) {
+        if (!res.status === 200) {
           return res.json().then((error) => Promise.reject(error));
         }
         username.value = '';
