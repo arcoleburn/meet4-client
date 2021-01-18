@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import TokenService from '../../Services/tokenService';
 
-
+import logo from '../../images/logo.png';
 import {HeaderWrapper, Logout,Login} from './Header.styles'
 const Header = (props) => {
   const handleLogout = () => {
@@ -10,20 +10,29 @@ const Header = (props) => {
   };
 
   const renderLogoutLink = () => {
-    return (<Logout>
+    return (
+    
+    <>
+    <Link to ='/'>
+      <img   src={logo} alt='logo'/>
+  </Link>
+    <Logout>
       <p>{props.username}</p>
       <Link onClick={handleLogout} to="/">
         Logout
       </Link>
       </Logout>
-    );
+    
+    </>);
   };
 
   const renderLoginLink = () => {
     return (
+      <>
       <Login>
         <Link to="login">|Login|</Link>
       </Login>
+      </>
     );
   };
   return (

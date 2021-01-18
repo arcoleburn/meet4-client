@@ -5,11 +5,13 @@ export const HeaderWrapper = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+   margin: 0 15px 0 15px;
   a.title{
     justify-self: center;
   }
-
+img{
+  width: 50px;
+}
 `
 export const Logout = styled.div`
 display: flex;

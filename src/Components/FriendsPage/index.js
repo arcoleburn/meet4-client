@@ -4,6 +4,9 @@ import Meet4ApiService from '../../Services/meet4ApiService';
 import jwt from 'jsonwebtoken';
 import TokenService from '../../Services/tokenService';
 import FriendSummary from './FriendSummary';
+
+import {FriendPageWrapper} from './FriendsPage.styles'
+
 const FriendsPage = (props) => {
   const [loading, setLoading] = useState(false);
   const [friends, setFriends] = useState(['no friends yet']);
@@ -33,16 +36,18 @@ const FriendsPage = (props) => {
  
 
   return (
-    <>
-      <h2>Friends</h2>
+    <FriendPageWrapper>
+      <h3>Friends</h3>
+      <div className="links">
       <Link to="/addFriend">Add Friend </Link>
       <Link to="/requests">Friend Requests</Link>
+      </div>
       {loading
         ? 'Loading Friends...'
         : !friends
         ? 'No friends found. Click "add friend" to add more!'
         : friendsDisplay}
-    </>
+    </FriendPageWrapper>
   );
 };
 

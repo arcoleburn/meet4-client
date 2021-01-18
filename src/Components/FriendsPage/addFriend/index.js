@@ -33,6 +33,7 @@ const AddFriend = (props) => {
   }
   return (
     <RegLoginWrapper>
+      <h3>Add Friend</h3>
       {!sub && (
         <FormWrapper>
           <label htmlFor="username">Friend Username: </label>

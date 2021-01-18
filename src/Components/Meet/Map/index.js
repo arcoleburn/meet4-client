@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Meet4ApiService from '../../../Services/meet4ApiService';
+import Spinner from '../../Utils/Spinner';
+import { DirectionsWrapper, Wrapper } from './Directions.styles';
 import { Step } from './Steps';
 const Map = (props) => {
   const [loading, setLoading] = useState(true);
@@ -115,18 +117,25 @@ const Map = (props) => {
         }
       }
     }
-    return arr;
+    return (
+      <> 
+      <p className='duration'>{directions.routes[0].legs[0].duration.text} || {directions.routes[0].legs[0].distance.text}</p>
+      <DirectionsWrapper>
+      {arr}
+      </DirectionsWrapper>
+      </>
+      );
   };
 
   return (
     <>
       {!userDirections || !friendDirections || loading ? (
-        <p>loading...</p>
+        <Spinner/>
       ) : (
-        <>
-          <h3>user:</h3>
+        <Wrapper>
+          <h4>Directions for User to {props.business.name}</h4>
           {renderDirections(userDirections)}
-          <h3>friend:</h3>
+          <h4>Directions for Friend to {props.business.name}</h4>
           {renderDirections(friendDirections)}
           <button disabled={statsLogged} onClick={logMeeting}>
             {!statsLogged ? 'We Met Here!' : 'Stats updated'}
@@ -139,7 +148,7 @@ const Map = (props) => {
           <button onClick={() => props.history.push('/home')}>
             Cancel
           </button>
-        </>
+        </Wrapper>
       )}
     </>
   );

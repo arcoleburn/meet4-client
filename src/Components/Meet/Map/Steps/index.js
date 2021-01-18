@@ -4,6 +4,7 @@ import {
   faSubway,
 } from '@fortawesome/free-solid-svg-icons';
 
+import {MainWrapper, SubWrapper} from './Steps.styles'
 export const Step = (props) => {
   const { mainStep, type } = props;
 
@@ -12,35 +13,39 @@ export const Step = (props) => {
   };
 
   const renderMainStep = () => {
-    return (
-      <>
-        <h4>
+    return (<>
+      <MainWrapper>
           <FontAwesomeIcon
             icon={type === 'transit' ? faSubway : faWalking}
-          />
+          /><div className = 'instructions'>
           {parseInstructions(props.stepData.html_instructions)}
-        </h4>
+          </div>
+          <p className='duration'>
+          {props.stepData.duration.text}
+          </p>
+        </MainWrapper>
         {type === 'transit' ? (
-          <>
-            <li>
+          <SubWrapper>
+            <li className='tr'>
               Line: {props.stepData.transit_details.line.short_name}
             </li>
-            <li>
+            <li className='tr'>
               Arrive at:{' '}
               {props.stepData.transit_details.arrival_stop.name}
             </li>
-          </>
+          </SubWrapper>
         ) : null}{' '}
       </>
     );
   };
   const renderSubStep = () => {
     return (
-      <li>
+      <SubWrapper>
         {props.stepData.html_instructions
           ? parseInstructions(props.stepData.html_instructions):
-          'Transfer to next line'}
-      </li>
+          <li className="tr">Transfer to next line</li> 
+          }
+      </SubWrapper>
     );
   };
 

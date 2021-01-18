@@ -1,30 +1,29 @@
-import Meet4ApiService from "../../../Services/meet4ApiService";
+import Meet4ApiService from '../../../Services/meet4ApiService';
 
+import { ItemWrapper } from './RequestItem.styles';
 
+const RequestItem = (props) => {
+  const { username, id } = props.data;
 
-const RequestItem=(props)=>{
+  const handleAccept = (e) => {
+    console.log('id,', id);
+    Meet4ApiService.acceptFriendRequest(id);
+    props.delFromList(id);
+  };
+  const handleDelete = (e) => {
+    Meet4ApiService.deleteFriendRequest(id);
+    props.delFromList(id);
+  };
 
-  const {username, id} = props.data;
-
-  const handleAccept = (e) =>{
-    console.log('id,', id)
-    Meet4ApiService.acceptFriendRequest(id)
-    props.delFromList(id)
-  }
-  const handleDelete = (e) =>{
-    Meet4ApiService.deleteFriendRequest(id)
-    props.delFromList(id)
-  }
-
-  return(
-    <>
-    <div>
+  return (
+    <ItemWrapper>
       Username: {username}
-      <button onClick={handleAccept}>Accept</button>
-      <button onClick={handleDelete}>Delete</button>
-    </div>
-    </>
-  )
-}
+      <div className="controls">
+        <button onClick={handleAccept}>Accept</button>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+    </ItemWrapper>
+  );
+};
 
 export default RequestItem;

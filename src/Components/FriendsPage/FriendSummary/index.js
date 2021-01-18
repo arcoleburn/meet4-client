@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+
+
 import FriendSummaryExp from '../FriendSummaryExp';
+
+import {FriendSummaryWrapper} from './FriendSummary.styles'
 
 const FriendSummary = (props) => {
   const [expanded, setExpand] = useState(false);
@@ -10,11 +14,13 @@ const FriendSummary = (props) => {
 
   let { username, email, date_added: date } = props.friendData;
   return (
-    <>
-      <div>{username}</div>
-      <div>{email}</div>
-      <div>{date}</div>
-      {!expanded && <button onClick={handleClick}>More</button>}
+    <FriendSummaryWrapper>
+      <section onClick={handleClick}>
+      <div>{username && username}</div>
+      <div>{email && email}</div>
+      <div>{date && date.split('T')[0]}</div>
+      </section>
+      
       {expanded ? (
         <FriendSummaryExp
           handleClick={handleClick}
@@ -22,7 +28,7 @@ const FriendSummary = (props) => {
           removeFriend={props.removeFriend}
         />
       ) : null}
-    </>
+    </FriendSummaryWrapper>
   );
 };
 
