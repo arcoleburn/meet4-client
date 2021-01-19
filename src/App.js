@@ -5,6 +5,8 @@ import TokenService from './Services/tokenService';
 
 import PublicOnlyRoute from './Components/Utils/PublicRoute';
 import PrivateRoute from './Components/Utils/PrivateRoute';
+import ErrorBoundary from './Components/Utils/ErrorBoundary'
+import {AppWrapper} from './App.styles'
 
 import Home from './Components/Home'
 import LandingPage from './Components/LandingPage';
@@ -32,7 +34,8 @@ function App() {
   }, [userId]);
 
   return (
-    <>
+    <AppWrapper>
+    <ErrorBoundary>
       <Router>
         <Header setUserId={setUserId} username={username} />
         <Switch>
@@ -104,7 +107,8 @@ function App() {
           />
         </Switch>
       </Router>
-    </>
+    </ErrorBoundary>
+    </AppWrapper>
   );
 }
 export default App;

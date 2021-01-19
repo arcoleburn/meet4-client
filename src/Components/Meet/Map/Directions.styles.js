@@ -18,5 +18,8 @@ export const Wrapper = styled.div`
     margin-bottom: 0;
     margin-top: 0;
   }
-
+button{
+  margin: 10px;
+border-radius: 10px;
+}
 `;

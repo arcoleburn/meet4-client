@@ -18,8 +18,8 @@ flex-direction: column;
 align-items: center;
 img{
   border-radius: 10px;
-  width: 75vw;
-  height: 75vw;
+  width: 75%;
+  height: 75%;
   object-fit: cover;
 }
 

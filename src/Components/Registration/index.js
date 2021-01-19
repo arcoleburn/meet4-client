@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom'
 import logo from '../../images/logo.png';
 
 import {RegLoginWrapper} from '../Login/Login.styles'
+import Meet4ApiService from '../../Services/meet4ApiService';
 const RegistrationPage = (props) => {
   const handleRegSuccess = (user) => {
+    
     const { history } = props;
     history.push('/login');
   };

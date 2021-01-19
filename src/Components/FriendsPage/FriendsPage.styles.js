@@ -16,9 +16,11 @@ export const FriendPageWrapper = styled.div`
   }
 
   .links {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
+ 
+
 `

@@ -58,7 +58,7 @@ const Results = (props) => {
           </div>
           </Content>
         </Wrapper>
-      ) : <Map history={props.history} business={businesses[resNum]} data = {props.data} addressA = {addressA} addressB={addressB}/> }
+      ) : <Map history={props.history} business={businesses[resNum]} data = {props.data} addressA = {addressA} addressB={addressB} friendId = {props.friendId}/> }
     </>
   );
 };

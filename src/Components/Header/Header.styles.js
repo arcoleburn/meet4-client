@@ -12,6 +12,8 @@ export const HeaderWrapper = styled.nav`
 img{
   width: 50px;
 }
+
+
 `
 export const Logout = styled.div`
 display: flex;

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import TokenService from '../../Services/tokenService';
 import AuthApiService from '../../Services/authApiService';
 import {FormWrapper} from '../Utils/Form.styles'
+import Meet4ApiService from '../../Services/meet4ApiService';
 const LoginForm = (props) => {
   const [error, setError] = useState(null);
 
@@ -23,6 +24,8 @@ const LoginForm = (props) => {
         password.value = '';
         TokenService.saveAuthToken(res.authToken);
         props.onLoginSuccess();
+
+        Meet4ApiService.startStats()
       })
       .catch((res) => {
         setError({ error: res.error });

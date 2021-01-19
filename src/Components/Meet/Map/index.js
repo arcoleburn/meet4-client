@@ -3,6 +3,7 @@ import Meet4ApiService from '../../../Services/meet4ApiService';
 import Spinner from '../../Utils/Spinner';
 import { DirectionsWrapper, Wrapper } from './Directions.styles';
 import { Step } from './Steps';
+
 const Map = (props) => {
   const [loading, setLoading] = useState(true);
   const [userDirections, setUserDir] = useState(null);
@@ -14,7 +15,7 @@ const Map = (props) => {
   let destination = props.business.location.display_address.join(' ');
 
   useEffect(() => {
-   setLoading(true)
+    setLoading(true);
     Meet4ApiService.getDirections(userAddress, destination)
       .then((res) => setUserDir(res))
       .then(
@@ -29,14 +30,18 @@ const Map = (props) => {
   }, [destination, friendAddress, userAddress]);
 
   const logMeeting = () => {
+    //log history
+    //log user stat
+    //log friend stat
     console.log('meeting logged');
+    //logs history
     let user2 = props.data.friend;
     let loc1 = props.data.location;
-    console.log('loc1', loc1)
+    console.log('loc1', loc1);
     let loc2 = props.data.friendLocation;
     if (
       props.data.friend === 'Other' ||
-      props.data.friend === 'Other'
+      props.data.friendLocation === 'Other'
     ) {
       loc2 = props.data.manualFriendLoc;
     }
@@ -46,20 +51,30 @@ const Map = (props) => {
     if (props.data.friend === 'Other') {
       user2 = null;
     }
-    console.log('loc1', loc1)
-    console.log('biz', props.business.name)
+    console.log('loc1', loc1);
+    console.log('biz', props.business.name);
     Meet4ApiService.addHistory(
       user2,
       loc1,
       loc2,
       props.business.name,
       props.business.location.display_address.join(' '),
-      props.data.category.charAt(0).toUpperCase()+props.data.category.slice(1)
-    ).then((res) => {
-      if (res.status === 201) {
-        setStats(true);
-      }
-    });
+      props.data.category.charAt(0).toUpperCase() +
+        props.data.category.slice(1)
+    ).then(() =>
+      Meet4ApiService.updateUserStats(
+        props.data.category
+      ).then((res) =>
+        user2 == null
+          ? setStats(true)
+          : Meet4ApiService.updateFriendStats(
+              props.friendId,
+              props.data.category
+            ).then((res) => setStats(true))
+      )
+    );
+
+    //sets user stats
   };
 
   const addFavorite = () => {
@@ -118,19 +133,20 @@ const Map = (props) => {
       }
     }
     return (
-      <> 
-      <p className='duration'>{directions.routes[0].legs[0].duration.text} || {directions.routes[0].legs[0].distance.text}</p>
-      <DirectionsWrapper>
-      {arr}
-      </DirectionsWrapper>
+      <>
+        <p className="duration">
+          {directions.routes[0].legs[0].duration.text} ||{' '}
+          {directions.routes[0].legs[0].distance.text}
+        </p>
+        <DirectionsWrapper>{arr}</DirectionsWrapper>
       </>
-      );
+    );
   };
 
   return (
     <>
       {!userDirections || !friendDirections || loading ? (
-        <Spinner/>
+        <Spinner />
       ) : (
         <Wrapper>
           <h4>Directions for User to {props.business.name}</h4>
@@ -146,7 +162,7 @@ const Map = (props) => {
               : 'Favorite Added'}
           </button>
           <button onClick={() => props.history.push('/home')}>
-            Cancel
+            Cancel/Go Home
           </button>
         </Wrapper>
       )}

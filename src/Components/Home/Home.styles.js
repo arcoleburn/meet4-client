@@ -8,11 +8,11 @@ export const HomeWrapper = styled.div`
   box-sizing:border-box;
   place-items: center;
 }
-  width: 100vw;
+  width:100%;
   height: 60vh;
   background-color:#fff;
   display:grid;
-  grid-template-columns: 40vw 40vw;
+  grid-template-columns: 40% 40%;
   grid-row: auto auto;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
@@ -30,4 +30,5 @@ export const HomeWrapper = styled.div`
     font-family:sans-serif;
   }
 
+  
 `

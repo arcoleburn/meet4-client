@@ -49,7 +49,7 @@ const Meet = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target);
-    console.log(state);
+    console.log('state', state);
     setSub(true);
   };
 
@@ -157,13 +157,16 @@ const Meet = (props) => {
                 )
           }
           addressB={
-            state.friend === 'Other' || state.friendlocation === 'Other'
+            (state.friend === 'Other' || state.friendLocation === 'Other')
               ? state.manualFriendLoc
               : friendLocs.filter(
                   (x) => x.location_name === state.friendLocation
                 )
           }
           data={state}
+          friendId = {
+            (state.friend == 'Other' ? null : userFriends.filter(x=>x.username === state.friend)[0].id)
+          }
         />
       )}
     </>

@@ -6,11 +6,40 @@ const headers = {
 };
 
 const Meet4ApiService = {
+  startStats(){
+    return fetch(`${config.API_ENDPOINT}/profile/stats`,{
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type':'application/json'
+      },
+      method: 'POST'
+    }).then(res=>res.json())
+  },
   getStats() {
     return fetch(`${config.API_ENDPOINT}/profile/stats`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
       },
+    }).then((res) => res.json());
+  },
+  updateUserStats(category) {
+    return fetch(`${config.API_ENDPOINT}/profile/stats`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify({ category: category }),
+    }).then((res) => res.json());
+  },
+  updateFriendStats(id, category) {
+    return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify({ category: category }),
     }).then((res) => res.json());
   },
   getFriends() {
@@ -29,7 +58,7 @@ const Meet4ApiService = {
         'content-type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify({friendUsername: friendUsername}),
+      body: JSON.stringify({ friendUsername: friendUsername }),
     }).then((res) => res.json());
   },
   getFriendRequests() {
@@ -92,6 +121,7 @@ const Meet4ApiService = {
     ).then((res) => res.json());
   },
   getBusinesses(addressA, addressB, category) {
+    console.log('address B', addressB);
     return fetch(
       `${config.API_ENDPOINT}/directions/results?addressA=${addressA}&addressB=${addressB}&category=${category}`,
       {

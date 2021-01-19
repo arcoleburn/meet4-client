@@ -7,8 +7,8 @@ export const RegLoginWrapper = styled.div`
 
 img{
   object-fit: cover;
-  max-width: 80vw;
-  max-height: 33vh;
+  max-width: 80%;
+  max-height: 33%;
   align-self: center;
 }
 
@@ -16,5 +16,9 @@ a{
   align-self: center;
   font-size: 14px;
   margin: 10px;
+}
+@media all and (min-width: 700px){
+  max-width: 50vw;
+ 
 }
 `

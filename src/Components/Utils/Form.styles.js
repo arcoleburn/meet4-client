@@ -20,4 +20,9 @@ input,button, select{
   margin-top: 5px;
   margin-bottom: 10px;
 }
+
+@media all and (min-width: 700px){
+  max-width: 50vw;
+  
+}
 `
