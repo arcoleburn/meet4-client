@@ -154,14 +154,14 @@ const Meet = (props) => {
               ? state.manualLoc
               : userLocs.filter(
                   (x) => x.location_name === state.location
-                )
+                )[0].location_address
           }
           addressB={
             (state.friend === 'Other' || state.friendLocation === 'Other')
               ? state.manualFriendLoc
               : friendLocs.filter(
                   (x) => x.location_name === state.friendLocation
-                )
+                )[0].location_address
           }
           data={state}
           friendId = {
