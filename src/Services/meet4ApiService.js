@@ -3,7 +3,7 @@ import TokenService from './tokenService';
 
 const headers = {
   authorization: `bearer ${TokenService.getAuthToken()}`,
-};
+}
 
 const Meet4ApiService = {
   startStats(){

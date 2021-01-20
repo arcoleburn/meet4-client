@@ -43,7 +43,7 @@ const Results = (props) => {
               target="_blank"
               rel="noreferrer"
             >
-              View on Yelp
+            View on Yelp
             </a>
             <div className="controls">
               <button
