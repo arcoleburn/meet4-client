@@ -1,10 +1,6 @@
 import config from '../config';
 import TokenService from './tokenService';
 
-const headers = {
-  authorization: `bearer ${TokenService.getAuthToken()}`,
-}
-
 const Meet4ApiService = {
   startStats(){
     return fetch(`${config.API_ENDPOINT}/profile/stats`,{
@@ -44,7 +40,9 @@ const Meet4ApiService = {
   },
   getFriends() {
     return fetch(`${config.API_ENDPOINT}/friends`, {
-      headers,
+      headers:{
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
     }).then((res) =>
       res.json().then((data) => {
         return data;
@@ -63,32 +61,46 @@ const Meet4ApiService = {
   },
   getFriendRequests() {
     return fetch(`${config.API_ENDPOINT}/friends/requests`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      }
     }).then((res) => res.json());
   },
   acceptFriendRequest(id) {
     return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
       method: 'PATCH',
     }).then((res) => res.json());
   },
   deleteFriendRequest(id) {
     return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
       method: 'DELETE',
     });
     //.then((res) => res.json()).then(data=>data);
   },
   getFriendDetails(friendId) {
     return fetch(`${config.API_ENDPOINT}/friends/friendDetails`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
       body: JSON.stringify(friendId),
     }).then((res) => res.json());
   },
 
   getUserLocations() {
     return fetch(`${config.API_ENDPOINT}/profile/locations`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
     }).then((res) => res.json());
   },
 
@@ -105,7 +117,10 @@ const Meet4ApiService = {
   },
   deleteLocationForUser(id) {
     return fetch(`${config.API_ENDPOINT}/profile/locations/${id}`, {
-      headers,
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
       method: 'DELETE',
     });
   },

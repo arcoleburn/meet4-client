@@ -6,6 +6,7 @@ import TokenService from '../../Services/tokenService';
 import FriendSummary from './FriendSummary';
 
 import {FriendPageWrapper} from './FriendsPage.styles'
+import Spinner from '../Utils/Spinner';
 
 const FriendsPage = (props) => {
   const [loading, setLoading] = useState(false);
@@ -43,9 +44,9 @@ const FriendsPage = (props) => {
       <Link to="/requests">Friend Requests</Link>
       </div>
       {loading
-        ? 'Loading Friends...'
+        ? <Spinner/>
         : !friends
-        ? 'No friends found. Click "add friend" to add more!'
+        ? <p>No friends found. Click "add friend" to add more!</p>
         : friendsDisplay}
     </FriendPageWrapper>
   );
