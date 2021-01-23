@@ -10,7 +10,7 @@ const {location_name, location_address, id} = props.data
 const handleDelete = (e) =>{
   e.preventDefault()
   Meet4ApiService.deleteLocationForUser(id)
-  console.log('loc del')
+  
   props.delFromList(id)
 }
 //need to create functions for edit and delete, as well as edit form and submit form 

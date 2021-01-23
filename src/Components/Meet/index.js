@@ -48,8 +48,6 @@ const Meet = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log('state', state);
     setSub(true);
   };
 

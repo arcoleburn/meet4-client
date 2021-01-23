@@ -105,7 +105,6 @@ const Meet4ApiService = {
   },
 
   addLocationForUser(location) {
-    console.log('location sent', location);
     return fetch(`${config.API_ENDPOINT}/profile/locations`, {
       headers: {
         'content-type': 'application/json',
@@ -136,7 +135,6 @@ const Meet4ApiService = {
     ).then((res) => res.json());
   },
   getBusinesses(addressA, addressB, category) {
-    console.log('address B', addressB);
     return fetch(
       `${config.API_ENDPOINT}/directions/results?addressA=${addressA}&addressB=${addressB}&category=${category}`,
       {
@@ -174,7 +172,6 @@ const Meet4ApiService = {
       restaurant_address,
       category,
     };
-    console.log('new history', newHistory);
     return fetch(`${config.API_ENDPOINT}/history`, {
       headers: {
         'content-type': 'application/json',

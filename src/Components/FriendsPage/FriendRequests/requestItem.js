@@ -6,7 +6,6 @@ const RequestItem = (props) => {
   const { username, id } = props.data;
 
   const handleAccept = (e) => {
-    console.log('id,', id);
     Meet4ApiService.acceptFriendRequest(id);
     props.delFromList(id);
   };

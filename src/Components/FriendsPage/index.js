@@ -24,7 +24,6 @@ const FriendsPage = (props) => {
 
   const removeFriendFromList =(id) => {
     let newFriends = [...friends]
-    console.log('rem friend list ran')
     setFriends(newFriends.filter(x=>x.id !== id))
   }
 

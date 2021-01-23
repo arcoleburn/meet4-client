@@ -30,14 +30,9 @@ const Map = (props) => {
   }, [destination, friendAddress, userAddress]);
 
   const logMeeting = () => {
-    //log history
-    //log user stat
-    //log friend stat
-    console.log('meeting logged');
-    //logs history
+    
     let user2 = props.data.friend;
     let loc1 = props.data.location;
-    console.log('loc1', loc1);
     let loc2 = props.data.friendLocation;
     if (
       props.data.friend === 'Other' ||
@@ -51,8 +46,6 @@ const Map = (props) => {
     if (props.data.friend === 'Other') {
       user2 = null;
     }
-    console.log('loc1', loc1);
-    console.log('biz', props.business.name);
     Meet4ApiService.addHistory(
       user2,
       loc1,
@@ -74,28 +67,22 @@ const Map = (props) => {
       )
     );
 
-    //sets user stats
   };
 
   const addFavorite = () => {
-    console.log('added favorite');
-    //need code to actually save favorite
     setFav(true);
   };
 
   const renderDirections = (directions) => {
     let majorSteps = directions.routes[0].legs[0].steps;
-    console.log('major i', majorSteps[0].steps.length);
     let arr = [];
     for (let i = 0; i < majorSteps.length; i++) {
-      // console.log('major i length in loop', majorSteps[i].steps.length)
       let substeps;
 
       majorSteps[i].steps
         ? (substeps = majorSteps[i].steps)
         : (substeps = []);
 
-      console.log('i', i, 'substeps', substeps);
       majorSteps[i].travel_mode === 'TRANSIT'
         ? arr.push(
             <Step
