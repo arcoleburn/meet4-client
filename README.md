@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Meet 4 
+
+[Live App](https://meet4.xyz)
+
+[Server Code](https://github.com/arcoleburn/meet4-server)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## About 
+Meet4 is an app that helps you meet up with your friends for pizza, coffee or beer, in any city with a subway system. 
 
-In the project directory, you can run:
+## How it works
+- Select what you want to meet4: Pizza, Beer, or Coffee
+        
+- Select one of your saved locations, or input an address from scratch
+- Select a friend and select one of their saved addresses, or input their location from scratch
+- Hit go!
 
-### `npm start`
+        
+The Meet4 algorithm will find the midpoint between your two locations by subway, and then query Yelp to find a selection of pizza shops, coffee shops, or bars nearby where you can meet your friend. Once you pick one, we use GoogleMaps to get you transit directions right from the app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+All our results have a '$' rating on Yelp, so dont worry about breaking the bank!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Walkthrough / Screenshots
+### Meeting
+![step1](src/images/annotated/walkthrough1.png)
+---
+---
+![step2](src/images/annotated/walkthrough2.png)
+---
+---
+![step3](src/images/annotated/walkthrough3.png)
+---
+---
+![step4](src/images/annotated/walkthrough4.png)
+---
+---
+![step5](src/images/annotated/walkthrough5.png)
+---
+---
+![step6](src/images/annotated/resultspage.png)
+---
+---
+![step7](src/images/annotated/directionspage.png)
+---
+---
+![step8](src/images/annotated/directionscontrols.png)
+---
+---
+### User Profile  
+![profile](src/images/annotated/profilepage.png)
+---
+---
+![friend1](src/images/annotated/friend1.png)
+---
+---
+![friend2](src/images/annotated/friend2.png)
 
-### `npm test`
+## Friend Request System 
+Meet4 uses an asyncronous friend request system. A user can input another user's username to add them as a friend. This creates a friendship in the Meet4 database. When the other user visits their Friend Requests page, they will see an item for each pending friend request.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Should they click accept, the friendship is marked as confirmed, and each user gets access to the others saved locations. 
 
-### `npm run build`
+Should they deny, the frienship is deleted from the database. They same occurs when a user clicks "delete friend" on the expanded friend view. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Used 
+<b>Client</b>
+- React (bootstrapped with Create React App)
+- React Router 
+- JSON Web Token (for authorization) 
+- Styled Components 
+- Font Awesome (for icons)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<b>Server</b>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node/Express
+- PostgreSQL
+- Knex 
+- node-fetch 
+- Node Geometry Library (for distance calculations)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+<b>Meet4 is powered by the GoogleMaps API and the YelpAPI

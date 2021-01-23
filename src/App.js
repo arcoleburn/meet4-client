@@ -43,7 +43,7 @@ function App() {
             exact
             path="/"
             component={(props) => (
-              <LandingPage {...props} setUserId={setUserId} />
+              <LandingPage {...props} setUserId={setUserId} setUsername={setUsername} />
             )}
           />
           <PublicOnlyRoute
