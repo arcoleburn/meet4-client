@@ -2,6 +2,7 @@ import React from 'react';
 import TokenService from '../../Services/tokenService';
 import authApiService from '../../Services/authApiService';
 import jwt from 'jsonwebtoken';
+import { Wrapper } from './landingPage.styles';
 const LandingPage = (props) => {
   const handleLoginSuccess = () => {
     const { location, history } = props;
@@ -34,13 +35,13 @@ const LandingPage = (props) => {
   };
 
   return (
-    <>
+    <Wrapper>
       <h1>Meet4</h1>
 
       <div>
         <p>
           Meeting up with friends can be tough. Everyone has a crazy
-          schedule. Hop on the subway and Meet in the middle
+          schedule. Hop on the subway and Meet in the middle.
         </p>
 
         <h4>How it works</h4>
@@ -71,7 +72,7 @@ const LandingPage = (props) => {
           Click Here to Launch Demo
         </button>
       </div>
-    </>
+    </Wrapper>
   );
 };
 
