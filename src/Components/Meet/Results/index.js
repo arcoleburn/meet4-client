@@ -10,14 +10,19 @@ const Results = (props) => {
   const [loading, setLoading] = useState(true);
   const [businesses, setBusinesses] = useState([]);
   const [selected, setSelected] = useState(false);
+  const [err, setErr] = useState(null);
 
   let { category, addressA, addressB } = props;
 
-  category == 'beer' ? (category = 'bar') : category = category
+  category == 'beer' ? (category = 'bar') : (category = category);
 
   useEffect(() => {
     Meet4ApiService.getBusinesses(addressA, addressB, category).then(
       (res) => {
+        if (res.status == 400) {
+          setErr(res.err);
+          setLoading(false);
+        }
         setBusinesses(res.businesses);
         setLoading(false);
       }
@@ -28,6 +33,8 @@ const Results = (props) => {
     <>
       {loading ? (
         <Spinner />
+      ) : err ? (
+        <p>{err}. Please go back and try again.</p>
       ) : !selected ? (
         <Wrapper>
           <h3>Results:</h3>
@@ -43,7 +50,7 @@ const Results = (props) => {
               target="_blank"
               rel="noreferrer"
             >
-            View on Yelp
+              View on Yelp
             </a>
             <div className="controls">
               <button

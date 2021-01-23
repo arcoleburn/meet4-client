@@ -158,7 +158,7 @@ const Map = (props) => {
           </button>
           <button disabled={favorite} onClick={addFavorite}>
             {!favorite
-              ? 'Add resturant to Favorites'
+              ? 'Add Restaurant to Favorites'
               : 'Favorite Added'}
           </button>
           <button onClick={() => props.history.push('/home')}>

@@ -9,9 +9,7 @@ const LandingPage = (props) => {
     const destination = (location.state || {}).from || '/home';
 
     props.setUserId(jwt.decode(TokenService.getAuthToken()).userId);
-    props.setFirstName(
-      jwt.decode(TokenService.getAuthToken()).firstName
-    );
+    props.setUsername(jwt.decode(TokenService.getAuthToken()).username)
 
     history.push(destination);
   };
