@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 
 export const Wrapper = styled.div`
+font-family: Helvetica,
 h1{
+  
   text-align: center
 }
 li{
@@ -15,4 +17,5 @@ margin: 20px;
 button{
   border-radius: 10px;
 }
+
 `

@@ -19,6 +19,7 @@ input,button, select{
   border-radius: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 @media all and (min-width: 700px){

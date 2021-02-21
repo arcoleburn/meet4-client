@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 import React, { useEffect, useState } from 'react';
 import Map from '../Map';
 import Meet4ApiService from '../../../Services/meet4ApiService';
@@ -14,12 +15,12 @@ const Results = (props) => {
 
   let { category, addressA, addressB } = props;
 
-  category == 'beer' ? (category = 'bar') : (category = category);
+  category === 'beer' ? (category = 'bar') : (category = category);
 
   useEffect(() => {
     Meet4ApiService.getBusinesses(addressA, addressB, category).then(
       (res) => {
-        if (res.status == 400) {
+        if (res.status === 400) {
           setErr(res.err);
           setLoading(false);
         }
@@ -40,9 +41,9 @@ const Results = (props) => {
           <h3>Results:</h3>
           <Content>
             <h2>{businesses[resNum].name}</h2>
-            <img src={businesses[resNum].image_url} alt="resturant" />
+            <img src={businesses[resNum].image_url} alt="restaurant" />
             <p>Address:</p>
-            <p>{businesses[resNum].location.display_address}</p>
+            <p>{businesses[resNum].location.display_address.toString().replace('New', ' New')}</p>
             <p>Phone:</p>
             <p>{businesses[resNum].display_phone}</p>
             <a

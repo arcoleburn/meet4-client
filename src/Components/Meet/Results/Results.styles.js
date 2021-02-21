@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   h3{
-    
+    margin-left: 15px;
   }
 `
 
@@ -16,11 +16,16 @@ margin: 10px;
 display:flex;
 flex-direction: column;
 align-items: center;
+background-color: var(--offWhite);
+box-shadow: grey 2px 2px 10px;
 img{
   border-radius: 10px;
   width: 75%;
   height: 75%;
   object-fit: cover;
+}
+h2{
+  text-align: center;
 }
 
 p{

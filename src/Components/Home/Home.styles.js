@@ -10,7 +10,7 @@ export const HomeWrapper = styled.div`
 }
   width:100%;
   height: 60vh;
-  background-color:#fff;
+  background-color:transparent;
   display:grid;
   grid-template-columns: 40% 40%;
   grid-row: auto auto;
@@ -27,7 +27,7 @@ export const HomeWrapper = styled.div`
     align-items:center;
     justify-content:center;
     font-size:32px;
-    font-family:sans-serif;
+    box-shadow: lightslategray 3px 3px 3px;
   }
 
   

@@ -29,6 +29,9 @@ const Header = (props) => {
   const renderLoginLink = () => {
     return (
       <>
+        <Link to ='/'>
+      <img   src={logo} alt='logo'/>
+  </Link>
       <Login>
         <Link to="login">|Login|</Link>
       </Login>

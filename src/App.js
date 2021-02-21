@@ -21,6 +21,7 @@ import Favorites from './Components/Favorites';
 import AddLocation from './Components/Locations/AddLocation'
 import FriendRequests from './Components/FriendsPage/FriendRequests';
 import AddFriend from './Components/FriendsPage/addFriend'
+import { GlobalStyle } from './globalStyles';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -37,6 +38,7 @@ function App() {
     <AppWrapper>
     <ErrorBoundary>
       <Router>
+        <GlobalStyle/>
         <Header setUserId={setUserId} username={username} />
         <Switch>
           <PublicOnlyRoute

@@ -16,11 +16,12 @@ const Profile = (props) => {
   });
   useEffect(() => {
     Meet4ApiService.getStats().then((x) =>
+      x.length ?     
       setStats({
         pizza: x[0].pizza_count,
         coffee: x[0].coffee_count,
         beer: x[0].beer_count,
-      })
+      }) : null
     );
   }, []);
 

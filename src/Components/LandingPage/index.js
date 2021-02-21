@@ -23,7 +23,7 @@ const LandingPage = (props) => {
         password: 'Password123',
       })
       .then((res) => {
-        if (!res.status == 200) {
+        if (res.status !== 200) {
           return res.json().then((err) => Promise.reject(err));
         }
         TokenService.saveAuthToken(res.authToken);
@@ -39,7 +39,7 @@ const LandingPage = (props) => {
       <div>
         <p>
           Meeting up with friends can be tough. Everyone has a crazy
-          schedule. Hop on the subway and Meet in the middle.
+          schedule. Hop on the subway and meet in the middle.
         </p>
 
         <h4>How it works</h4>
@@ -62,7 +62,7 @@ const LandingPage = (props) => {
           get you transit directions right from the app.
         </p>
         <p>
-          All our results have a '$' rating on Yelp, so dont worry
+          All our results have a '$' rating on Yelp, so don't worry
           about breaking the bank!
         </p>
 
