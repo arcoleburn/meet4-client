@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { Wrapper } from './landingPage.styles';
 const LandingPage = (props) => {
   const handleLoginSuccess = () => {
+    console.log('login suc')
     const { location, history } = props;
     const destination = (location.state || {}).from || '/home';
 
@@ -23,12 +24,13 @@ const LandingPage = (props) => {
         password: 'Password123',
       })
       .then((res) => {
-        if (res.status !== 200) {
+        if (!res.status === 200) {
           return res.json().then((err) => Promise.reject(err));
         }
+        else{
         TokenService.saveAuthToken(res.authToken);
         handleLoginSuccess();
-      })
+      }})
       .catch((res) => {});
   };
 
