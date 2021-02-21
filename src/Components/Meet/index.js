@@ -17,6 +17,7 @@ const initialFormState = {
 };
 
 function reducer(state, { field, value }) {
+  console.log('reducer ran')
   return {
     ...state,
     [field]: value,
@@ -43,6 +44,7 @@ const Meet = (props) => {
           [{ location_name: 'Other', id: 'other' }].concat([...data])
         )
       );
+      dispatch({field: 'friendLocation', value: 'Other'})
     }
   };
 
@@ -138,7 +140,7 @@ const Meet = (props) => {
               </select>
             )}
             {state.friendLocation === 'Other'
-              ? makeOtherField('manualFriendLoc', 'Other: ')
+              ? makeOtherField('manualFriendLoc', 'Other (enter address): ')
               : null}
             <button type="submit">Go!</button>
           </FormWrapper>{' '}
