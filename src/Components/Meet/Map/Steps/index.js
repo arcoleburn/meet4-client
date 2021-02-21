@@ -9,7 +9,7 @@ export const Step = (props) => {
   const { mainStep, type } = props;
 
   const parseInstructions = (instructions) => {
-    return instructions.replace(/<[^>]+>/g, '').replace('Destination ', '. Destination ');
+    return <li>{instructions.replace(/<[^>]+>/g, '').replace('Destination ', '. Destination ')} </li>;
   };
 
   const renderMainStep = () => {
