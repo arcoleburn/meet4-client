@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 body{
-  font-family: 'Chela One', helvetica, cursive;
+  font-family: 'Chela One', Helvetica, cursive;
   background-image: linear-gradient(180deg, white, var(--teal));
   height: 100%;
   min-height: 100vh;
