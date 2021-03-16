@@ -3,7 +3,7 @@ import TokenService from '../../Services/tokenService';
 import authApiService from '../../Services/authApiService';
 import jwt from 'jsonwebtoken';
 import { Wrapper } from './landingPage.styles';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 import { Spinner } from '../Utils/spinner.styles';
 const LandingPage = (props) => {
   const [loading, setLoading] = useState(false);
