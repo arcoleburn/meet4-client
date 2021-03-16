@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 
 import TokenService from '../../Services/tokenService';
 import AuthApiService from '../../Services/authApiService';
-import {FormWrapper} from '../Utils/Form.styles'
+import { FormWrapper } from '../Utils/Form.styles';
 import Meet4ApiService from '../../Services/meet4ApiService';
+import Spinner from '../Utils/Spinner';
 const LoginForm = (props) => {
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const handleSubmitJwtAuth = (ev) => {
     ev.preventDefault();
     setError(null);
+    setLoading(true);
     const { username, password } = ev.target;
 
     AuthApiService.postLogin({
@@ -23,27 +25,33 @@ const LoginForm = (props) => {
         username.value = '';
         password.value = '';
         TokenService.saveAuthToken(res.authToken);
+        setLoading(false);
         props.onLoginSuccess();
 
-        Meet4ApiService.startStats()
+        Meet4ApiService.startStats();
       })
       .catch((res) => {
+        setLoading(false); //set loading false if error caught
         setError({ error: res.error });
       });
   };
 
   return (
+    //conditional render
     <>
-      <FormWrapper onSubmit={handleSubmitJwtAuth}>
-        {error && <div>{error.error}</div>}
-        <label htmlFor="username"> Username: </label>
-        <input required type="text" id="username" />
-        <label htmlFor="password">Password: </label>
-        <input required id="password" type="password" />
-        <button type="submit"> Login </button>
-      </FormWrapper>
+      {loading && <Spinner />}
+      {!loading && (
+        <FormWrapper onSubmit={handleSubmitJwtAuth}>
+          {error && <div>{error.error}</div>}
+          <label htmlFor="username"> Username: </label>
+          <input required type="text" id="username" />
+          <label htmlFor="password">Password: </label>
+          <input required id="password" type="password" />
+          <button type="submit"> Login </button>
+        </FormWrapper>
+      )}
     </>
   );
 };
 
-export default LoginForm
+export default LoginForm;

@@ -3,21 +3,26 @@ import TokenService from '../../Services/tokenService';
 import authApiService from '../../Services/authApiService';
 import jwt from 'jsonwebtoken';
 import { Wrapper } from './landingPage.styles';
+import { useState } from 'react/cjs/react.development';
+import { Spinner } from '../Utils/spinner.styles';
 const LandingPage = (props) => {
+  const [loading, setLoading] = useState(false);
   const handleLoginSuccess = () => {
-    console.log('login suc')
+    console.log('login suc');
     const { location, history } = props;
     const destination = (location.state || {}).from || '/home';
 
     props.setUserId(jwt.decode(TokenService.getAuthToken()).userId);
-    props.setUsername(jwt.decode(TokenService.getAuthToken()).username)
+    props.setUsername(
+      jwt.decode(TokenService.getAuthToken()).username
+    );
 
     history.push(destination);
   };
 
   const handleDemoClick = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     authApiService
       .postLogin({
         username: 'demoUser',
@@ -25,12 +30,16 @@ const LandingPage = (props) => {
       })
       .then((res) => {
         if (!res.status === 200) {
-          return res.json().then((err) => Promise.reject(err));
+          return res.json().then((err) => {
+            Promise.reject(err);
+            setLoading(false);
+          });
+        } else {
+          TokenService.saveAuthToken(res.authToken);
+          setLoading(false);
+          handleLoginSuccess();
         }
-        else{
-        TokenService.saveAuthToken(res.authToken);
-        handleLoginSuccess();
-      }})
+      })
       .catch((res) => {});
   };
 
@@ -67,7 +76,7 @@ const LandingPage = (props) => {
           All our results have a '$' rating on Yelp, so don't worry
           about breaking the bank!
         </p>
-
+        {loading && <Spinner/>}
         <button onClick={handleDemoClick}>
           Click Here to Launch Demo
         </button>
