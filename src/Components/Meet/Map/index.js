@@ -58,7 +58,7 @@ const Map = (props) => {
       Meet4ApiService.updateUserStats(
         props.data.category
       ).then((res) =>
-        user2 == null
+        user2 === null
           ? setStats(true)
           : Meet4ApiService.updateFriendStats(
               props.friendId,

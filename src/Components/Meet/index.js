@@ -165,7 +165,7 @@ const Meet = (props) => {
           }
           data={state}
           friendId = {
-            (state.friend == 'Other' ? null : userFriends.filter(x=>x.username === state.friend)[0].id)
+            (state.friend === 'Other' ? null : userFriends.filter(x=>x.username === state.friend)[0].id)
           }
         />
       )}
