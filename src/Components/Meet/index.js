@@ -4,8 +4,8 @@ import Meet4ApiService from '../../Services/meet4ApiService';
 import TokenService from '../../Services/tokenService';
 import Results from './Results';
 
-import {FormWrapper} from '../Utils/Form.styles'
-import {MeetWrapper} from './Meet.styles'
+import { FormWrapper } from '../Utils/Form.styles';
+import { MeetWrapper } from './Meet.styles';
 
 const initialFormState = {
   category: 'pizza',
@@ -17,7 +17,7 @@ const initialFormState = {
 };
 
 function reducer(state, { field, value }) {
-  console.log('reducer ran')
+  console.log('reducer ran');
   return {
     ...state,
     [field]: value,
@@ -27,9 +27,11 @@ function reducer(state, { field, value }) {
 const Meet = (props) => {
   const [sub, setSub] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialFormState);
+  const [excludeChains, setChains] = useState(false)
   const [userLocs, setUserLocs] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [friendLocs, setFriendLocs] = useState([]);
+  
 
   const username = jwt.decode(TokenService.getAuthToken()).username;
   const onChange = (e) => {
@@ -44,7 +46,7 @@ const Meet = (props) => {
           [{ location_name: 'Other', id: 'other' }].concat([...data])
         )
       );
-      dispatch({field: 'friendLocation', value: 'Other'})
+      dispatch({ field: 'friendLocation', value: 'Other' });
     }
   };
 
@@ -140,14 +142,27 @@ const Meet = (props) => {
               </select>
             )}
             {state.friendLocation === 'Other'
-              ? makeOtherField('manualFriendLoc', 'Other (enter address): ')
+              ? makeOtherField(
+                  'manualFriendLoc',
+                  'Other (enter address): '
+                )
               : null}
+            <div id='chainsbox'>
+                {/* need to make a click here change state */}
+              <input type="checkbox"  id="chains" onClick={()=>{
+                console.log('box clicked')
+                setChains(!excludeChains)}
+              }/>
+              <label htmlFor="chains">Exclude Chains?</label>
+            </div>
             <button type="submit">Go!</button>
           </FormWrapper>{' '}
         </MeetWrapper>
       )}
       {sub && (
-        <Results history={props.history}
+        <Results
+        excludeChains={excludeChains}
+          history={props.history}
           category={state.category}
           addressA={
             state.location === 'Other'
@@ -157,15 +172,20 @@ const Meet = (props) => {
                 )[0].location_address
           }
           addressB={
-            (state.friend === 'Other' || state.friendLocation === 'Other')
+            state.friend === 'Other' ||
+            state.friendLocation === 'Other'
               ? state.manualFriendLoc
               : friendLocs.filter(
                   (x) => x.location_name === state.friendLocation
                 )[0].location_address
           }
           data={state}
-          friendId = {
-            (state.friend === 'Other' ? null : userFriends.filter(x=>x.username === state.friend)[0].id)
+          friendId={
+            state.friend === 'Other'
+              ? null
+              : userFriends.filter(
+                  (x) => x.username === state.friend
+                )[0].id
           }
         />
       )}

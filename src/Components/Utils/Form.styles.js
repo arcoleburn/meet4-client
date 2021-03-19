@@ -27,6 +27,20 @@ input, select:focus{
 font-size:16px;
 background-color: white;
 }
+#chains{
+
+}
+#chainsbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  width: 100%; 
+  input{
+    width: 20px;
+  }
+}
+
 @media all and (min-width: 700px){
   max-width: 50vw;
   

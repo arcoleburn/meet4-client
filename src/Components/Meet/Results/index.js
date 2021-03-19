@@ -12,10 +12,23 @@ const Results = (props) => {
   const [businesses, setBusinesses] = useState([]);
   const [selected, setSelected] = useState(false);
   const [err, setErr] = useState(null);
-
+  const chains = [
+    'dunkin',
+    '7-eleven',
+    'pret',
+    'starbucks',
+    'mcdonalds',
+    'burger-king',
+    'caesar',
+    'panera',
+    'dominos',
+    'subway',
+    'pizza-hut',
+    'papa-john',
+  ];
   let { category, addressA, addressB } = props;
 
-  category === 'beer' ? (category = 'bar') : (category = category);
+  category === 'beer' ? (category = 'bars') : (category = category);
 
   useEffect(() => {
     Meet4ApiService.getBusinesses(addressA, addressB, category).then(
@@ -24,7 +37,11 @@ const Results = (props) => {
           setErr(res.err);
           setLoading(false);
         }
-        setBusinesses(res.businesses);
+        !props.excludeChains
+          ? setBusinesses(res.businesses)
+          : setBusinesses(res.businesses.filter(
+              (biz) => !chains.some(str=> biz.alias.includes(str))
+            ));
         setLoading(false);
       }
     );
@@ -38,12 +55,19 @@ const Results = (props) => {
         <p>{err}. Please go back and try again.</p>
       ) : !selected ? (
         <Wrapper>
-          <h3>Results:</h3>
+          <h3>Result {resNum+1} of {businesses.length}:</h3>
           <Content>
             <h2>{businesses[resNum].name}</h2>
-            <img src={businesses[resNum].image_url} alt="restaurant" />
+            <img
+              src={businesses[resNum].image_url}
+              alt="restaurant"
+            />
             <p>Address:</p>
-            <p>{businesses[resNum].location.display_address.toString().replace('New', ' New')}</p>
+            <p>
+              {businesses[resNum].location.display_address
+                .toString()
+                .replace('New', ' New')}
+            </p>
             <p>Phone:</p>
             <p>{businesses[resNum].display_phone}</p>
             <a
