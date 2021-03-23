@@ -2,14 +2,14 @@ import config from '../config';
 import TokenService from './tokenService';
 
 const Meet4ApiService = {
-  startStats(){
-    return fetch(`${config.API_ENDPOINT}/profile/stats`,{
+  startStats() {
+    return fetch(`${config.API_ENDPOINT}/profile/stats`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type':'application/json'
+        'content-type': 'application/json',
       },
-      method: 'POST'
-    }).then(res=>res.json())
+      method: 'POST',
+    }).then((res) => res.json());
   },
   getStats() {
     return fetch(`${config.API_ENDPOINT}/profile/stats`, {
@@ -40,9 +40,9 @@ const Meet4ApiService = {
   },
   getFriends() {
     return fetch(`${config.API_ENDPOINT}/friends`, {
-      headers:{
-        authorization: `bearer ${TokenService.getAuthToken()}`
-      }
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
     }).then((res) =>
       res.json().then((data) => {
         return data;
@@ -63,14 +63,14 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/friends/requests`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-      }
+      },
     }).then((res) => res.json());
   },
   acceptFriendRequest(id) {
     return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       method: 'PATCH',
     }).then((res) => res.json());
@@ -79,7 +79,7 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/friends/${id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       method: 'DELETE',
     });
@@ -89,7 +89,7 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/friends/friendDetails`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       body: JSON.stringify(friendId),
     }).then((res) => res.json());
@@ -99,7 +99,7 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/profile/locations`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
     }).then((res) => res.json());
   },
@@ -118,7 +118,7 @@ const Meet4ApiService = {
     return fetch(`${config.API_ENDPOINT}/profile/locations/${id}`, {
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       method: 'DELETE',
     });
@@ -179,6 +179,27 @@ const Meet4ApiService = {
       },
       method: 'POST',
       body: JSON.stringify(newHistory),
+    });
+  },
+  getFavorites() {
+    return fetch(`${config.API_ENDPOINT}/favorites`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+      },
+    }).then((res) =>
+      res.json().then((data) => {
+        return data;
+      })
+    );
+  },
+  addFavorite(fav) {
+    return fetch(`${config.API_ENDPOINT}/favorites`, {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(fav),
     });
   },
 };

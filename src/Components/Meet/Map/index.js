@@ -9,7 +9,7 @@ const Map = (props) => {
   const [userDirections, setUserDir] = useState(null);
   const [friendDirections, setFriendDir] = useState(null);
   const [statsLogged, setStats] = useState(false);
-  const [favorite, setFav] = useState(false);
+  const [favorite, setFav] = useState(false); //should build a "Check for fav" endpt
   let userAddress = props.addressA;
   let friendAddress = props.addressB;
   let destination = props.business.location.display_address.join(' ');
@@ -71,6 +71,16 @@ const Map = (props) => {
 
   const addFavorite = () => {
     setFav(true);
+    let newFav = {
+      restaurant_name: props.business.name,
+      restaurant_address: destination,
+      restaurant_phone: props.business.display_phone,
+      category: props.data.category,
+      yelp_id: props.business.id,
+      url: props.business.url,
+      img_url: props.business.image_url
+    }
+    Meet4ApiService.addFavorite(newFav)
   };
 
   const renderDirections = (directions) => {
