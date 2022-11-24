@@ -1,6 +1,6 @@
 # Meet 4 
 
-[Live App](https://meet4.xyz)
+[Live App](https://meet4.xyz) NOTE: Due to Heroku deprecating their free tier, the live app is currently broken.
 
 [Server Code](https://github.com/arcoleburn/meet4-server)
 
